@@ -20,11 +20,15 @@ export const validateEnv = (): ExtendedClient["env"] => {
   if (!process.env.MONGO_URL) {
     throw new Error("Missing MONGO_URL environment variable");
   }
+  if (!process.env.OWNER_ID) {
+    throw new Error("Missing OWNER_ID environment variable");
+  }
   return {
     token: process.env.TOKEN,
     homeGuild: process.env.HOME_GUILD_ID,
     debugHook: new WebhookClient({
       url: process.env.DEBUG_HOOK,
     }),
+    ownerId: process.env.OWNER_ID,
   };
 };

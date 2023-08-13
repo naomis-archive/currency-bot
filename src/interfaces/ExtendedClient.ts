@@ -8,6 +8,7 @@ export interface ExtendedClient extends Client {
     token: string;
     homeGuild: string;
     debugHook: WebhookClient;
+    ownerId: string;
   };
   commands: Command[];
   db: PrismaClient;

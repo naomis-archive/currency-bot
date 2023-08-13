@@ -26,12 +26,18 @@ suite("validateEnv utility", () => {
     assert.throws(validateEnv, "Missing MONGO_URL environment variable");
   });
 
-  test("returns the environment cache when all variables are present", () => {
+  test("throws an error when missing OWNER_ID", () => {
     process.env.MONGO_URL = "https://example.com";
+    assert.throws(validateEnv, "Missing OWNER_ID environment variable");
+  });
+
+  test("returns the environment cache when all variables are present", () => {
+    process.env.OWNER_ID = "123";
     const result = validateEnv();
     assert.equal(result.token, "discord bot token");
     assert.equal(result.homeGuild, "123");
     assert.instanceOf(result.debugHook, WebhookClient);
+    assert.equal(result.ownerId, "123");
   });
 
   after(() => {
@@ -39,5 +45,6 @@ suite("validateEnv utility", () => {
     delete process.env.HOME_GUILD_ID;
     delete process.env.DEBUG_HOOK;
     delete process.env.MONGO_URL;
+    delete process.env.OWNER_ID;
   });
 });
