@@ -12,6 +12,7 @@ type Currency {
     silver   Int @default(0)
     gold     Int @default(0)
     platinum Int @default(0)
+    amethyst Int @default(0)
 }
 
 model users {

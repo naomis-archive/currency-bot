@@ -5,4 +5,5 @@ export const Emotes: { [key in keyof users["currency"]]: string } = {
   silver: "<:naomisilver:1140129928084455474>",
   gold: "<:naomigold:1140129934526914690>",
   platinum: "<:naomiplatinum:1140129931343446076>",
+  amethyst: "<:naomiamethyst:1140325730304147527>",
 };

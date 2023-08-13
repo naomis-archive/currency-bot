@@ -5,4 +5,5 @@ export const CurrencyValues: { [key in keyof users["currency"]]: number } = {
   silver: 100,
   gold: 10000,
   platinum: 1000000,
+  amethyst: 100000000,
 };
