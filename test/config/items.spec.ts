@@ -13,4 +13,17 @@ suite("Items config", () => {
   test("cannot have more than 25 items", () => {
     assert.isAtMost(Items.length, 25);
   });
+
+  test("must meet embed requirements", () => {
+    for (const item of Items) {
+      {
+        assert.isAtMost(item.name.length, 256, `Name too long: ${item.name}`);
+        assert.isAtMost(
+          item.description.length,
+          4096,
+          `Description too long: ${item.description}`
+        );
+      }
+    }
+  });
 });
