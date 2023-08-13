@@ -7,6 +7,7 @@ import { calculateMessageCurrency } from "./modules/calculateMessageCurrency";
 import { makeChange } from "./modules/makeChange";
 import { sumCurrency } from "./modules/sumCurrency";
 import { errorHandler } from "./utils/errorHandler";
+import { getDataRecord } from "./utils/getDataRecord";
 import { loadCommands } from "./utils/loadCommands";
 import { logHandler } from "./utils/logHandler";
 import { registerCommands } from "./utils/registerCommands";
@@ -68,21 +69,10 @@ import { validateEnv } from "./utils/validateEnv";
         }
         // set it here to avoid race conditions
         bot.cooldowns[author.id] = Date.now();
-        const userRecord = await bot.db.users.upsert({
-          where: {
-            userId: author.id,
-          },
-          create: {
-            userId: author.id,
-            currency: {
-              copper: 0,
-              silver: 0,
-              gold: 0,
-              platinum: 0,
-            },
-          },
-          update: {},
-        });
+        const userRecord = await getDataRecord(bot, author.id);
+        if (!userRecord) {
+          return;
+        }
         const total =
           sumCurrency(userRecord.currency) + calculateMessageCurrency(content);
         const newCurrency = makeChange(total);
