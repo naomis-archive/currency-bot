@@ -12,4 +12,7 @@ export interface ExtendedClient extends Client {
   };
   commands: Command[];
   db: PrismaClient;
+  cooldowns: {
+    [userId: string]: number;
+  };
 }

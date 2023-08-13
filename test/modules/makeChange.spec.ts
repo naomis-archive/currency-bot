@@ -16,9 +16,17 @@ const currencyTwo = {
   platinum: 1,
 };
 
+const noCurrency = {
+  copper: 0,
+  silver: 0,
+  gold: 0,
+  platinum: 0,
+};
+
 suite("makeChange module", () => {
   test("should return the correct currency objects", () => {
     assert.deepEqual(makeChange(4004412), currencyOne);
     assert.deepEqual(makeChange(1010101), currencyTwo);
+    assert.deepEqual(makeChange(0), noCurrency);
   });
 });

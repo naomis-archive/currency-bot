@@ -18,7 +18,6 @@ model users {
     id       String   @id @default(auto()) @map("_id") @db.ObjectId
     userId   String
     currency Currency
-    cooldown DateTime @default(now())
 
     @@unique([userId], map: "userId")
 }
