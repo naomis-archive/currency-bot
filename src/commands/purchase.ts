@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 
+import { CurrencyName } from "../config/CurrencyName";
 import { Items } from "../config/Items";
 import { Command } from "../interfaces/Command";
 import { makeChange } from "../modules/makeChange";
@@ -42,9 +43,9 @@ export const purchase: Command = {
       const oldTotal = sumCurrency(userRecord.currency);
       if (oldTotal < item.price) {
         await interaction.editReply({
-          content: `You don't have enough NaomiCoin to purchase a **${
+          content: `You don't have enough ${CurrencyName} to purchase a **${
             item.name
-          }**!\nYou have ${oldTotal.toLocaleString()} NaomiCoin, and need ${item.price.toLocaleString()}.`,
+          }**!\nYou have ${oldTotal.toLocaleString()} ${CurrencyName}, and need ${item.price.toLocaleString()}.`,
         });
         return;
       }
@@ -61,7 +62,7 @@ export const purchase: Command = {
       await interaction.editReply({
         content: `You successfully purchased a **${
           item.name
-        }**!\nYou now have ${newTotal.toLocaleString()} NaomiCoin.\n`,
+        }**!\nYou now have ${newTotal.toLocaleString()} ${CurrencyName}.\n`,
       });
       await interaction.channel?.send({
         content: `<@!${bot.env.ownerId}>, a purchase was made!`,

@@ -1,5 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
+import { CurrencyName } from "../config/CurrencyName";
 import { Items } from "../config/Items";
 import { Command } from "../interfaces/Command";
 import { makeChange } from "../modules/makeChange";
@@ -36,7 +37,7 @@ export const item: Command = {
       embed.setDescription(item.description);
       embed.addFields([
         {
-          name: `${item.price.toLocaleString()} NaomiCoin`,
+          name: `${item.price.toLocaleString()} ${CurrencyName}`,
           value: parseCurrencyString(makeChange(item.price)),
         },
       ]);

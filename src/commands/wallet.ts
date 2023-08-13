@@ -1,5 +1,6 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
+import { CurrencyName } from "../config/CurrencyName";
 import { Command } from "../interfaces/Command";
 import { parseCurrencyString } from "../modules/parseCurrencyString";
 import { sumCurrency } from "../modules/sumCurrency";
@@ -9,7 +10,7 @@ import { getDataRecord } from "../utils/getDataRecord";
 export const wallet: Command = {
   data: new SlashCommandBuilder()
     .setName("wallet")
-    .setDescription("See how many NaomiCoin you have."),
+    .setDescription(`See how many ${CurrencyName} you have.`),
   run: async (bot, interaction) => {
     try {
       const userRecord = await getDataRecord(bot, interaction.user.id);
@@ -20,7 +21,7 @@ export const wallet: Command = {
         return;
       }
       const embed = new EmbedBuilder();
-      embed.setTitle("Your NaomiCoin");
+      embed.setTitle(`Your ${CurrencyName}`);
       embed.setDescription(parseCurrencyString(userRecord.currency));
       embed.addFields([
         {

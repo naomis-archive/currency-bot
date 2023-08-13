@@ -1,6 +1,7 @@
 import { users } from "@prisma/client";
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 
+import { CurrencyName } from "../config/CurrencyName";
 import { CurrencyValues } from "../config/CurrencyValues";
 import { Emotes } from "../config/Emotes";
 import { Command } from "../interfaces/Command";
@@ -18,11 +19,11 @@ export const about: Command = {
         ([currency, value]) =>
           `One ${
             Emotes[currency]
-          } is worth ${value.toLocaleString()} NaomiCoin.`
+          } is worth ${value.toLocaleString()} ${CurrencyName}.`
       );
 
       const embed = new EmbedBuilder();
-      embed.setTitle("NaomiCoin");
+      embed.setTitle(CurrencyName);
       embed.setDescription(
         "Our currency system is designed to reward activity in our community. You earn currency slowly as you interact with your fellow members, and can be granted currency by Naomi for specific events and rewards.\n\nYou can use your currency to purchase items with the `/purchase` command. If you want to know about a specific item, you can look it up with the `/item` command. See how much you currently have with the `/wallet` command!\n\nCurrencies have no cash value."
       );
