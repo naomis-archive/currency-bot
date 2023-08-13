@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-typescript-template",
+  "name": "naomi-currency",
   "version": "0.0.0",
   "description": "A template for my nodejs projects",
   "main": "prod/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/naomi-lgbt/nodejs-typescript-template.git"
+    "url": "git+ssh://git@github.com/naomi-lgbt/naomi-currency.git"
   },
   "engines": {
     "node": "18.17.1",
@@ -27,10 +27,11 @@
   "author": "Naomi Carrigan",
   "license": "MPL-2.0",
   "bugs": {
-    "url": "https://github.com/naomi-lgbt/nodejs-typescript-template/issues"
+    "url": "https://github.com/naomi-lgbt/naomi-currency/issues"
   },
-  "homepage": "https://github.com/naomi-lgbt/nodejs-typescript-template#readme",
+  "homepage": "https://github.com/naomi-lgbt/naomi-currency#readme",
   "dependencies": {
+    "discord.js": "14.12.1",
     "dotenv": "16.3.1",
     "winston": "3.10.0"
   },
