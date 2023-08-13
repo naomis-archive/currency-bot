@@ -2,10 +2,17 @@ import { Item } from "../interfaces/Item";
 
 export const Items: Item[] = [
   {
+    name: "Slot in Bio",
+    description:
+      "Naomi's personal account has a space in her bio for a special person. You can become that special person, until someone buys this again and takes the slot from you.",
+    price: 53921,
+    internalId: "bio-slot",
+  },
+  {
     name: "Custom Colour Role",
     description:
       "You get your very own custom colour role, which you get to name AND set the colour for.",
-    price: 20168,
+    price: 201680,
     internalId: "colour-role",
   },
   {
@@ -42,5 +49,18 @@ export const Items: Item[] = [
       "Naomi is not allowed to use the `everyone` or `here` pings for the rest of the month! Announcements are going to be very quiet.",
     price: 732237,
     internalId: "no-pings",
+  },
+  {
+    name: "Choose Naomi's Avatar",
+    description:
+      "Make Naomi change her status to whatever you want for 24 hours. Must be family-friendly and appropriate for this community, and comply with Discord ToS.",
+    price: 1398241,
+    internalId: "set-avatar",
+  },
+  {
+    name: "Hall of Fame",
+    description: "Get your name on the Hall of Fame list in the server.",
+    price: 100000000,
+    internalId: "hall-of-fame",
   },
 ];
