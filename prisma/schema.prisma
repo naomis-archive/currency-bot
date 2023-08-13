@@ -1,0 +1,24 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("MONGO_URL")
+}
+
+type Currency {
+    copper   Int @default(0)
+    silver   Int @default(0)
+    gold     Int @default(0)
+    platinum Int @default(0)
+}
+
+model users {
+    id       String   @id @default(auto()) @map("_id") @db.ObjectId
+    userId   String
+    currency Currency
+    cooldown DateTime @default(now())
+
+    @@unique([userId], map: "userId")
+}
