@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { Client, Events, GatewayIntentBits } from "discord.js";
 
+import { Intents } from "./config/Intents";
 import { ExtendedClient } from "./interfaces/ExtendedClient";
 import { calculateMessageCurrency } from "./modules/calculateMessageCurrency";
 import { makeChange } from "./modules/makeChange";
@@ -15,7 +16,7 @@ import { validateEnv } from "./utils/validateEnv";
 (async () => {
   try {
     const bot = new Client({
-      intents: [GatewayIntentBits.Guilds],
+      intents: Intents,
     }) as ExtendedClient;
     bot.env = validateEnv();
     bot.db = new PrismaClient();
