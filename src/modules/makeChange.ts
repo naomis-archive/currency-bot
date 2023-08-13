@@ -10,26 +10,17 @@ import { CurrencyValues } from "../config/CurrencyValues";
  */
 export const makeChange = (amount: number): users["currency"] => {
   let clonedAmount = amount;
-  const currency: users["currency"] = {
-    copper: 0,
-    silver: 0,
-    gold: 0,
-    platinum: 0,
-  };
+  const values = Object.entries(CurrencyValues) as [
+    keyof users["currency"],
+    number
+  ][];
+  const sortedValues = values.sort((a, b) => b[1] - a[1]);
+  const currency = { ...CurrencyValues };
 
-  const platinum = Math.floor(clonedAmount / CurrencyValues.platinum);
-  clonedAmount -= platinum * CurrencyValues.platinum;
-  const gold = Math.floor(clonedAmount / CurrencyValues.gold);
-  clonedAmount -= gold * CurrencyValues.gold;
-  const silver = Math.floor(clonedAmount / CurrencyValues.silver);
-  clonedAmount -= silver * CurrencyValues.silver;
-  const copper = Math.floor(clonedAmount / CurrencyValues.copper);
-  clonedAmount -= copper * CurrencyValues.copper;
-
-  currency.platinum = platinum;
-  currency.gold = gold;
-  currency.silver = silver;
-  currency.copper = copper;
-
+  for (const [key, value] of sortedValues) {
+    const total = Math.floor(clonedAmount / value);
+    clonedAmount -= total * value;
+    currency[key] = total;
+  }
   return currency;
 };
