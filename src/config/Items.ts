@@ -23,9 +23,9 @@ export const Items: Item[] = [
     internalId: "upload-emote",
   },
   {
-    name: "Set Naomi's Nickname",
+    name: "Set Naomi's Display Name",
     description:
-      "Make Naomi change her nickname to whatever you want. Will remain until the next time this is purchased. Must be family-friendly and appropriate for this community. Advertisements are not permitted.",
+      "Make Naomi change her display name (on her personal account) to whatever you want. Will remain until the next time this is purchased. Must be family-friendly and appropriate for this community. Advertisements are not permitted.",
     price: 66928,
     internalId: "set-nick",
   },
@@ -39,7 +39,7 @@ export const Items: Item[] = [
   {
     name: "Set Naomi's Status",
     description:
-      "Make Naomi change her status to whatever you want. Will remain until the next time this is purchased. Must be family-friendly and appropriate for this community. Advertisements are not permitted.",
+      "Make Naomi change her status (on her personal account) to whatever you want. Will remain until the next time this is purchased. Must be family-friendly and appropriate for this community. Advertisements are not permitted.",
     price: 415002,
     internalId: "set-status",
   },
@@ -53,7 +53,7 @@ export const Items: Item[] = [
   {
     name: "Choose Naomi's Avatar",
     description:
-      "Make Naomi change her avatar to whatever you want. Will remain until the next time this is purchased. Must be family-friendly and appropriate for this community, and comply with Discord ToS.",
+      "Make Naomi change her avatar (on her personal account) to whatever you want. Will remain until the next time this is purchased. Must be family-friendly and appropriate for this community, and comply with Discord ToS.",
     price: 1398241,
     internalId: "set-avatar",
   },
