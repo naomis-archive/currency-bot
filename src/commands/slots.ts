@@ -42,9 +42,9 @@ export const slots: Command = {
       const third = getRandomValue(Slots);
       const set = new Set([first, second, third]);
       const won = set.size < 3;
-      // lose if three different, if two match get 10x, if three match get 100x
+      // lose if three different, if two match get 25x, if three match get 250x
       const result =
-        set.size >= 3 ? 0 - wager : set.size === 2 ? wager * 10 : wager * 100;
+        set.size >= 3 ? 0 - wager : set.size === 2 ? wager * 25 : wager * 250;
       await interaction.editReply({
         content: `Spinning...\n# ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
