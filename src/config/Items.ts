@@ -67,7 +67,7 @@ export const Items: Item[] = [
     name: "Go on a 'Date' with Naomi",
     description:
       "You get an hour of time to vibe with Naomi, but you have to do the planning. You could play games, pair on some code, get your resume or project reviewed, and more! Must be family-friendly and appropriate for our community.",
-    price: 250000000,
+    price: 500000000,
     internalId: "date",
   },
 ];
