@@ -53,7 +53,7 @@ export const Items: Item[] = [
   {
     name: "Choose Naomi's Avatar",
     description:
-      "Make Naomi change her status to whatever you want for 24 hours. Must be family-friendly and appropriate for this community, and comply with Discord ToS.",
+      "Make Naomi change her avatar to whatever you want for 24 hours. Must be family-friendly and appropriate for this community, and comply with Discord ToS.",
     price: 1398241,
     internalId: "set-avatar",
   },
