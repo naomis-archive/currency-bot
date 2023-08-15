@@ -46,6 +46,20 @@ export const slots: Command = {
         });
         return;
       }
+      // played less than 5 minutes ago
+      if (
+        bot.slots[interaction.user.id] &&
+        Date.now() - bot.slots[interaction.user.id].lastPlayed < 300000
+      ) {
+        await interaction.editReply({
+          content: "You can only play slots once every 5 minutes.",
+        });
+        return;
+      }
+      bot.slots[interaction.user.id] = {
+        lastPlayed: Date.now(),
+      };
+
       const wager = interaction.options.getInteger("wager", true);
       const userRecord = await getDataRecord(bot, interaction.user.id);
       if (!userRecord) {

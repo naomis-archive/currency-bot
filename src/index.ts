@@ -31,6 +31,7 @@ import { validateEnv } from "./utils/validateEnv";
     bot.env = validateEnv();
     bot.db = new PrismaClient();
     bot.cooldowns = {};
+    bot.slots = {};
     bot.wordGame = {};
     await bot.db.$connect();
     await loadCommands(bot);
