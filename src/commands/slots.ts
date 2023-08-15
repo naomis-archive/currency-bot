@@ -22,6 +22,13 @@ export const slots: Command = {
     ),
   run: async (bot, interaction) => {
     try {
+      if (bot.wordGame[interaction.user.id]) {
+        await interaction.editReply({
+          content:
+            "You cannot play slots while you have an active word game. Please finish that before playing slots.",
+        });
+        return;
+      }
       const wager = interaction.options.getInteger("wager", true);
       const userRecord = await getDataRecord(bot, interaction.user.id);
       if (!userRecord) {

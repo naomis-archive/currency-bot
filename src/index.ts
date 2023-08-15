@@ -1,10 +1,19 @@
 import { PrismaClient } from "@prisma/client";
-import { Client, Events, GatewayIntentBits } from "discord.js";
+import {
+  ActionRowBuilder,
+  Client,
+  Events,
+  GatewayIntentBits,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+} from "discord.js";
 
 import { Intents } from "./config/Intents";
 import { ExtendedClient } from "./interfaces/ExtendedClient";
 import { calculateMessageCurrency } from "./modules/calculateMessageCurrency";
 import { makeChange } from "./modules/makeChange";
+import { processWordGuess } from "./modules/processWordGuess";
 import { sumCurrency } from "./modules/sumCurrency";
 import { errorHandler } from "./utils/errorHandler";
 import { getDataRecord } from "./utils/getDataRecord";
@@ -22,29 +31,68 @@ import { validateEnv } from "./utils/validateEnv";
     bot.env = validateEnv();
     bot.db = new PrismaClient();
     bot.cooldowns = {};
+    bot.wordGame = {};
     await bot.db.$connect();
     await loadCommands(bot);
 
     bot.on(Events.InteractionCreate, async (interaction) => {
       try {
-        if (!interaction.isChatInputCommand()) {
-          return;
+        if (interaction.isChatInputCommand()) {
+          await interaction.deferReply();
+          if (!isGuildCommandCommand(interaction)) {
+            await interaction.editReply({
+              content: "You can only run this in a guild.",
+            });
+            return;
+          }
+          const target = bot.commands.find(
+            (c) => c.data.name === interaction.commandName
+          );
+          if (!target) {
+            await interaction.editReply({ content: "Command not found." });
+            return;
+          }
+          await target.run(bot, interaction);
         }
-        await interaction.deferReply();
-        if (!isGuildCommandCommand(interaction)) {
-          await interaction.editReply({
-            content: "You can only run this in a guild.",
-          });
-          return;
+        if (interaction.isButton()) {
+          if (interaction.customId.startsWith("word-")) {
+            const id = interaction.customId.split("-")[1];
+            if (id !== interaction.user.id) {
+              await interaction.reply({
+                content: "This isn't your word game!",
+                ephemeral: true,
+              });
+            }
+            if (!bot.wordGame[id]) {
+              await interaction.reply({
+                content:
+                  "This might be a stale message, as you don't have a game in the cache. Please start a new game.",
+                ephemeral: true,
+              });
+              return;
+            }
+            const input = new TextInputBuilder()
+              .setCustomId("guess")
+              .setLabel("What is your guess?")
+              .setStyle(TextInputStyle.Short)
+              .setMinLength(5)
+              .setMaxLength(5)
+              .setRequired(true);
+            const row = new ActionRowBuilder<TextInputBuilder>().addComponents(
+              input
+            );
+            const modal = new ModalBuilder()
+              .setTitle("Guess the word!")
+              .setCustomId(`word-${id}`)
+              .addComponents(row);
+            await interaction.showModal(modal);
+          }
         }
-        const target = bot.commands.find(
-          (c) => c.data.name === interaction.commandName
-        );
-        if (!target) {
-          await interaction.editReply({ content: "Command not found." });
-          return;
+        if (interaction.isModalSubmit()) {
+          if (interaction.customId.startsWith("word-")) {
+            await processWordGuess(bot, interaction);
+          }
         }
-        await target.run(bot, interaction);
       } catch (err) {
         await errorHandler(bot, "interaction create event", err);
       }

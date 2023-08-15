@@ -25,6 +25,13 @@ export const purchase: Command = {
     ),
   run: async (bot, interaction) => {
     try {
+      if (bot.wordGame[interaction.user.id]) {
+        await interaction.editReply({
+          content:
+            "You cannot purchase items while you have an active word game. Please finish that before playing slots.",
+        });
+        return;
+      }
       const id = interaction.options.getString("target", true);
       const item = Items.find((i) => i.internalId === id);
       if (!item) {
