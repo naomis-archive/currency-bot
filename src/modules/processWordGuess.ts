@@ -45,7 +45,7 @@ export const processWordGuess = async (
     await interaction.deferUpdate();
     cache.guesses.push(formatWordGuess(guess, cache.target));
     if (guess === cache.target) {
-      const newTotal = cache.balance + cache.wager * 5;
+      const newTotal = cache.balance + cache.wager * 4;
       await interaction.message.edit({
         content: `You won ${
           cache.wager * 5
