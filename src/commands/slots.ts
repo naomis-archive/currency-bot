@@ -75,6 +75,7 @@ export const slots: Command = {
         });
         return;
       }
+      const totalWithoutWager = oldTotal - wager;
       const first = getRandomValue(Slots);
       const second = getRandomValue(Slots);
       const third = getRandomValue(Slots);
@@ -84,27 +85,30 @@ export const slots: Command = {
       const won = set.size < 5;
 
       const result = wager * calculateWinRate(5 - set.size + 1);
-      set.size >= 3
-        ? 0 - wager
-        : set.size === 2
-        ? wager * Slots.length * 2
-        : wager * Math.pow(Slots.length, 2) * 2;
       await interaction.editReply({
-        content: `Spinning...\n# ${SlotReel} ${SlotReel} ${SlotReel}`,
+        content: `Spinning...\n# ${SlotReel} ${SlotReel} ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
       await sleep(1000);
       await interaction.editReply({
-        content: `Spinning...\n# ${first} ${SlotReel} ${SlotReel}`,
+        content: `Spinning...\n# ${first} ${SlotReel} ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
       await sleep(1000);
       await interaction.editReply({
-        content: `Spinning...\n# ${first} ${second} ${SlotReel}`,
+        content: `Spinning...\n# ${first} ${second} ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
       await sleep(1000);
       await interaction.editReply({
-        content: `Spinning...\n# ${first} ${second} ${third}`,
+        content: `Spinning...\n# ${first} ${second} ${third} ${SlotReel} ${SlotReel}`,
       });
-      const newTotal = oldTotal + result;
+      await sleep(1000);
+      await interaction.editReply({
+        content: `Spinning...\n# ${first} ${second} ${third} ${fourth} ${SlotReel}`,
+      });
+      await sleep(1000);
+      await interaction.editReply({
+        content: `Spinning...\n# ${first} ${second} ${third} ${fourth} ${fifth}`,
+      });
+      const newTotal = totalWithoutWager + result;
       await bot.db.users.update({
         where: {
           userId: interaction.user.id,
@@ -116,7 +120,7 @@ export const slots: Command = {
       await interaction.editReply({
         content: `You ${won ? "won" : "lost"} ${Math.abs(
           result
-        ).toLocaleString()} ${CurrencyName}!\n# ${first} ${second} ${third}`,
+        ).toLocaleString()} ${CurrencyName}!\n# ${first} ${second} ${third} ${fourth} ${fifth}\nYou now have ${newTotal.toLocaleString()} ${CurrencyName}.`,
       });
     } catch (err) {
       await errorHandler(bot, "slots command", err);
