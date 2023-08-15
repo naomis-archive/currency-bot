@@ -13,7 +13,7 @@ import { sleep } from "../utils/sleep";
 const calculateWinRate = (matches: number) => {
   switch (matches) {
     case 1:
-      return -1;
+      return 0;
     case 2:
       return 1;
     case 3:
@@ -118,9 +118,11 @@ export const slots: Command = {
         },
       });
       await interaction.editReply({
-        content: `You ${won ? "won" : "lost"} ${Math.abs(
-          result
-        ).toLocaleString()} ${CurrencyName}!\n# ${first} ${second} ${third} ${fourth} ${fifth}\nYou now have ${newTotal.toLocaleString()} ${CurrencyName}.`,
+        content: `You ${
+          won
+            ? `won ${result.toLocaleString()}`
+            : `lost ${wager.toLocaleString()}`
+        } ${CurrencyName}!\n# ${first} ${second} ${third} ${fourth} ${fifth}\nYou now have ${newTotal.toLocaleString()} ${CurrencyName}.`,
       });
     } catch (err) {
       await errorHandler(bot, "slots command", err);
