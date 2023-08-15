@@ -139,3 +139,18 @@ suite("format word guess util", () => {
     );
   });
 });
+
+suite("REGRESSIONS: format word guess util", () => {
+  test("comparing extra to alert", () => {
+    assert.equal(
+      formatWordGuess("extra", "alert"),
+      `${asciiColours("e", "yellow")}${asciiColours(
+        "x",
+        "white"
+      )}${asciiColours("t", "yellow")}${asciiColours(
+        "r",
+        "green"
+      )}${asciiColours("a", "yellow")}`
+    );
+  });
+});

@@ -10,10 +10,10 @@ const generateCount = (word: string) =>
     return acc;
   }, {});
 
-const countCorrect = (guess: string, target: string) => {
+const countCorrect = (guess: string, target: string, letter: string) => {
   let correct = 0;
   for (let i = 0; i < guess.length; i++) {
-    if (guess[i] === target[i]) {
+    if (guess[i] === target[i] && guess[i] === letter) {
       correct++;
     }
   }
@@ -39,7 +39,7 @@ export const formatWordGuess = (guess: string, target: string) => {
       if (
         target.includes(letter) &&
         targetCounts[letter] > 0 &&
-        countCorrect(guess.slice(index), target.slice(index)) <
+        countCorrect(guess.slice(index), target.slice(index), letter) <
           targetCounts[letter]
       ) {
         targetCounts[letter]--;
