@@ -51,7 +51,11 @@ export const slots: Command = {
       const won = set.size < 3;
       // lose if three different, if two match get 25x, if three match get 250x
       const result =
-        set.size >= 3 ? 0 - wager : set.size === 2 ? wager * 25 : wager * 250;
+        set.size >= 3
+          ? 0 - wager
+          : set.size === 2
+          ? wager * Slots.length * 2
+          : wager * Math.pow(Slots.length, 2) * 2;
       await interaction.editReply({
         content: `Spinning...\n# ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
