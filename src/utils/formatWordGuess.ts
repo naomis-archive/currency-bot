@@ -37,7 +37,8 @@ export const formatWordGuess = (guess: string, target: string) => {
       if (
         target.includes(letter) &&
         targetCounts[letter] > 0 &&
-        countCorrect(guess, target) < targetCounts[letter]
+        countCorrect(guess.slice(index), target.slice(index)) <
+          targetCounts[letter]
       ) {
         targetCounts[letter]--;
         return `[2;33m${letter}[0m`;
