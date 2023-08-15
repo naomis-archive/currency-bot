@@ -3,6 +3,7 @@ import { ModalSubmitInteraction } from "discord.js";
 import { CurrencyName } from "../config/CurrencyName";
 import { Words } from "../config/Words";
 import { ExtendedClient } from "../interfaces/ExtendedClient";
+import { makeChange } from "../modules/makeChange";
 import { errorHandler } from "../utils/errorHandler";
 import { formatWordGuess } from "../utils/formatWordGuess";
 
@@ -56,9 +57,17 @@ ${cache.guesses.join("\n")}
         components: [],
       });
       delete bot.wordGame[interaction.user.id];
+      await bot.db.users.update({
+        where: {
+          userId: interaction.user.id,
+        },
+        data: {
+          currency: { ...makeChange(cache.balance + cache.wager * 50) },
+        },
+      });
       return;
     }
-    if (cache.guesses.length === 5) {
+    if (cache.guesses.length >= 5) {
       await interaction.message.edit({
         content: `You lost ${cache.wager} ${CurrencyName}! The word was ${
           cache.target
@@ -70,6 +79,14 @@ ${cache.guesses.join("\n")}
         components: [],
       });
       delete bot.wordGame[interaction.user.id];
+      await bot.db.users.update({
+        where: {
+          userId: interaction.user.id,
+        },
+        data: {
+          currency: { ...makeChange(cache.balance - cache.wager) },
+        },
+      });
       return;
     }
 
