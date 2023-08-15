@@ -10,6 +10,23 @@ import { getDataRecord } from "../utils/getDataRecord";
 import { getRandomValue } from "../utils/getRandomValue";
 import { sleep } from "../utils/sleep";
 
+const calculateWinRate = (matches: number) => {
+  switch (matches) {
+    case 1:
+      return -1;
+    case 2:
+      return 1;
+    case 3:
+      return 10;
+    case 4:
+      return 25;
+    case 5:
+      return 50;
+    default:
+      return 1;
+  }
+};
+
 export const slots: Command = {
   data: new SlashCommandBuilder()
     .setName("slots")
@@ -29,6 +46,20 @@ export const slots: Command = {
         });
         return;
       }
+      // played less than 5 minutes ago
+      if (
+        bot.slots[interaction.user.id] &&
+        Date.now() - bot.slots[interaction.user.id].lastPlayed < 300000
+      ) {
+        await interaction.editReply({
+          content: "You can only play slots once every 5 minutes.",
+        });
+        return;
+      }
+      bot.slots[interaction.user.id] = {
+        lastPlayed: Date.now(),
+      };
+
       const wager = interaction.options.getInteger("wager", true);
       const userRecord = await getDataRecord(bot, interaction.user.id);
       if (!userRecord) {
@@ -47,15 +78,17 @@ export const slots: Command = {
       const first = getRandomValue(Slots);
       const second = getRandomValue(Slots);
       const third = getRandomValue(Slots);
-      const set = new Set([first, second, third]);
-      const won = set.size < 3;
-      // lose if three different, if two match get 25x, if three match get 250x
-      const result =
-        set.size >= 3
-          ? 0 - wager
-          : set.size === 2
-          ? wager * Slots.length * 2
-          : wager * Math.pow(Slots.length, 2) * 2;
+      const fourth = getRandomValue(Slots);
+      const fifth = getRandomValue(Slots);
+      const set = new Set([first, second, third, fourth, fifth]);
+      const won = set.size < 5;
+
+      const result = wager * calculateWinRate(5 - set.size + 1);
+      set.size >= 3
+        ? 0 - wager
+        : set.size === 2
+        ? wager * Slots.length * 2
+        : wager * Math.pow(Slots.length, 2) * 2;
       await interaction.editReply({
         content: `Spinning...\n# ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
