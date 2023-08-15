@@ -45,10 +45,10 @@ export const processWordGuess = async (
     await interaction.deferUpdate();
     cache.guesses.push(formatWordGuess(guess, cache.target));
     if (guess === cache.target) {
-      const newTotal = cache.balance + cache.wager * 50;
+      const newTotal = cache.balance + cache.wager * 5;
       await interaction.message.edit({
         content: `You won ${
-          cache.wager * 50
+          cache.wager * 5
         } ${CurrencyName}! Your new total is ${newTotal} ${CurrencyName}.
             
 \`\`\`ansi
@@ -62,7 +62,7 @@ ${cache.guesses.join("\n")}
           userId: interaction.user.id,
         },
         data: {
-          currency: { ...makeChange(cache.balance + cache.wager * 50) },
+          currency: { ...makeChange(newTotal) },
         },
       });
       return;
