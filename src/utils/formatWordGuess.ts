@@ -1,3 +1,5 @@
+import { asciiColours } from "./asciiColours";
+
 const generateCount = (word: string) =>
   word.split("").reduce((acc: Record<string, number>, letter) => {
     if (!acc[letter]) {
@@ -32,7 +34,7 @@ export const formatWordGuess = (guess: string, target: string) => {
     .map((letter, index) => {
       if (letter === target[index]) {
         targetCounts[letter]--;
-        return `[2;36m${letter}[0m`;
+        return asciiColours(letter, "green");
       }
       if (
         target.includes(letter) &&
@@ -41,9 +43,9 @@ export const formatWordGuess = (guess: string, target: string) => {
           targetCounts[letter]
       ) {
         targetCounts[letter]--;
-        return `[2;33m${letter}[0m`;
+        return asciiColours(letter, "yellow");
       }
-      return `[2;37m${letter}[0m`;
+      return asciiColours(letter, "white");
     })
     .join("");
 };
