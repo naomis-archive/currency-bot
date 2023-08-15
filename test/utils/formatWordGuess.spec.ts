@@ -10,7 +10,7 @@ suite("format word guess util", () => {
       `${asciiColours("t", "green")}${asciiColours("e", "green")}${asciiColours(
         "s",
         "green"
-      )}${asciiColours("t", "green")}${asciiColours("y", "green")}`
+      )}${asciiColours("t", "green")}${asciiColours("y", "green")}: 🟢🟢🟢🟢🟢`
     );
   });
 
@@ -20,7 +20,7 @@ suite("format word guess util", () => {
       `${asciiColours("a", "white")}${asciiColours("a", "white")}${asciiColours(
         "a",
         "white"
-      )}${asciiColours("a", "white")}${asciiColours("a", "white")}`
+      )}${asciiColours("a", "white")}${asciiColours("a", "white")}: ⚪⚪⚪⚪⚪`
     );
   });
 
@@ -30,7 +30,7 @@ suite("format word guess util", () => {
       `${asciiColours("a", "green")}${asciiColours("c", "white")}${asciiColours(
         "c",
         "white"
-      )}${asciiColours("c", "white")}${asciiColours("c", "white")}`
+      )}${asciiColours("c", "white")}${asciiColours("c", "white")}: 🟢⚪⚪⚪⚪`
     );
   });
 
@@ -43,7 +43,7 @@ suite("format word guess util", () => {
       )}${asciiColours("c", "white")}${asciiColours(
         "d",
         "white"
-      )}${asciiColours("e", "white")}`
+      )}${asciiColours("e", "white")}: 🟡⚪⚪⚪⚪`
     );
   });
 
@@ -53,7 +53,7 @@ suite("format word guess util", () => {
       `${asciiColours("a", "white")}${asciiColours("b", "white")}${asciiColours(
         "c",
         "white"
-      )}${asciiColours("d", "white")}${asciiColours("e", "yellow")}`
+      )}${asciiColours("d", "white")}${asciiColours("e", "yellow")}: ⚪⚪⚪⚪🟡`
     );
   });
 
@@ -66,7 +66,7 @@ suite("format word guess util", () => {
       )}${asciiColours("c", "white")}${asciiColours(
         "d",
         "white"
-      )}${asciiColours("e", "yellow")}`
+      )}${asciiColours("e", "yellow")}: 🟡⚪⚪⚪🟡`
     );
   });
 
@@ -79,7 +79,7 @@ suite("format word guess util", () => {
       )}${asciiColours("a", "green")}${asciiColours(
         "c",
         "white"
-      )}${asciiColours("d", "white")}`
+      )}${asciiColours("d", "white")}: 🟡⚪🟢⚪⚪`
     );
   });
 
@@ -89,7 +89,7 @@ suite("format word guess util", () => {
       `${asciiColours("a", "green")}${asciiColours("b", "white")}${asciiColours(
         "a",
         "yellow"
-      )}${asciiColours("c", "white")}${asciiColours("d", "white")}`
+      )}${asciiColours("c", "white")}${asciiColours("d", "white")}: 🟢⚪🟡⚪⚪`
     );
   });
 
@@ -102,7 +102,7 @@ suite("format word guess util", () => {
       )}${asciiColours("a", "green")}${asciiColours(
         "c",
         "white"
-      )}${asciiColours("a", "yellow")}`
+      )}${asciiColours("a", "yellow")}: 🟡⚪🟢⚪🟡`
     );
   });
 
@@ -112,7 +112,7 @@ suite("format word guess util", () => {
       `${asciiColours("a", "green")}${asciiColours("b", "white")}${asciiColours(
         "a",
         "white"
-      )}${asciiColours("c", "white")}${asciiColours("d", "white")}`
+      )}${asciiColours("c", "white")}${asciiColours("d", "white")}: 🟢⚪⚪⚪⚪`
     );
   });
 
@@ -122,7 +122,7 @@ suite("format word guess util", () => {
       `${asciiColours("a", "white")}${asciiColours("b", "white")}${asciiColours(
         "a",
         "green"
-      )}${asciiColours("c", "white")}${asciiColours("d", "white")}`
+      )}${asciiColours("c", "white")}${asciiColours("d", "white")}: ⚪⚪🟢⚪⚪`
     );
   });
 
@@ -135,7 +135,7 @@ suite("format word guess util", () => {
       )}${asciiColours("a", "green")}${asciiColours(
         "c",
         "white"
-      )}${asciiColours("a", "white")}`
+      )}${asciiColours("a", "white")}: 🟡⚪🟢⚪⚪`
     );
   });
 });
@@ -150,7 +150,7 @@ suite("REGRESSIONS: format word guess util", () => {
       )}${asciiColours("t", "yellow")}${asciiColours(
         "r",
         "green"
-      )}${asciiColours("a", "yellow")}`
+      )}${asciiColours("a", "yellow")}: 🟡⚪🟡🟢🟡`
     );
   });
 });

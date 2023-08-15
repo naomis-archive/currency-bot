@@ -29,23 +29,28 @@ const countCorrect = (guess: string, target: string, letter: string) => {
  */
 export const formatWordGuess = (guess: string, target: string) => {
   const targetCounts = generateCount(target);
-  return guess
-    .split("")
-    .map((letter, index) => {
-      if (letter === target[index]) {
-        targetCounts[letter]--;
-        return asciiColours(letter, "green");
-      }
-      if (
-        target.includes(letter) &&
-        targetCounts[letter] > 0 &&
-        countCorrect(guess.slice(index), target.slice(index), letter) <
-          targetCounts[letter]
-      ) {
-        targetCounts[letter]--;
-        return asciiColours(letter, "yellow");
-      }
-      return asciiColours(letter, "white");
-    })
-    .join("");
+  const letters: string[] = [];
+  const emotes: string[] = [];
+  for (let i = 0; i < guess.length; i++) {
+    if (guess[i] === target[i]) {
+      letters.push(asciiColours(guess[i], "green"));
+      emotes.push("🟢");
+      targetCounts[guess[i]]--;
+      continue;
+    }
+    if (
+      target.includes(guess[i]) &&
+      targetCounts[guess[i]] > 0 &&
+      countCorrect(guess.slice(i), target.slice(i), guess[i]) <
+        targetCounts[guess[i]]
+    ) {
+      letters.push(asciiColours(guess[i], "yellow"));
+      emotes.push("🟡");
+      targetCounts[guess[i]]--;
+      continue;
+    }
+    letters.push(asciiColours(guess[i], "white"));
+    emotes.push("⚪");
+  }
+  return `${letters.join("")}: ${emotes.join("")}`;
 };
