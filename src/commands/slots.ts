@@ -10,18 +10,18 @@ import { getDataRecord } from "../utils/getDataRecord";
 import { getRandomValue } from "../utils/getRandomValue";
 import { sleep } from "../utils/sleep";
 
-const calculateWinRate = (matches: number) => {
-  switch (matches) {
-    case 1:
+const calculateWinRate = (setSize: number) => {
+  switch (setSize) {
+    case 5:
       return 0;
-    case 2:
+    case 4:
       return 1;
     case 3:
-      return 10;
-    case 4:
-      return 25;
-    case 5:
-      return 50;
+      return Slots.length;
+    case 2:
+      return Math.round(Slots.length * 10);
+    case 1:
+      return Math.round(Slots.length * 25);
     default:
       return 1;
   }
@@ -84,7 +84,7 @@ export const slots: Command = {
       const set = new Set([first, second, third, fourth, fifth]);
       const won = set.size < 5;
 
-      const result = wager * calculateWinRate(5 - set.size + 1);
+      const result = Math.round(wager * calculateWinRate(set.size));
       await interaction.editReply({
         content: `Spinning...\n# ${SlotReel} ${SlotReel} ${SlotReel} ${SlotReel} ${SlotReel}`,
       });
