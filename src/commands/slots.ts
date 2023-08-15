@@ -17,11 +17,11 @@ const calculateWinRate = (matches: number) => {
     case 2:
       return 1;
     case 3:
-      return 10;
+      return Slots.length;
     case 4:
-      return 25;
+      return Math.round(Slots.length * 1.5);
     case 5:
-      return 50;
+      return Math.round(Slots.length * 3);
     default:
       return 1;
   }
