@@ -15,4 +15,12 @@ export interface ExtendedClient extends Client {
   cooldowns: {
     [userId: string]: number;
   };
+  wordGame: {
+    [userId: string]: {
+      wager: number;
+      guesses: string[];
+      target: string;
+      balance: number;
+    };
+  };
 }
