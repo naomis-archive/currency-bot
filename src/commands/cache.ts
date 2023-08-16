@@ -5,7 +5,7 @@ import { Command } from "../interfaces/Command";
 import { ExtendedClient } from "../interfaces/ExtendedClient";
 import { errorHandler } from "../utils/errorHandler";
 
-export const award: Command = {
+export const cache: Command = {
   data: new SlashCommandBuilder()
     .setName("cache")
     .setDescription(
