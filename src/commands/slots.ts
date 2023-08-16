@@ -39,7 +39,7 @@ export const slots: Command = {
     ),
   run: async (bot, interaction) => {
     try {
-      if (bot.wordGame[interaction.user.id]) {
+      if (bot.cache.wordGame[interaction.user.id]) {
         await interaction.editReply({
           content:
             "You cannot play slots while you have an active word game. Please finish that before playing slots.",
@@ -48,15 +48,15 @@ export const slots: Command = {
       }
       // played less than 5 minutes ago
       if (
-        bot.slots[interaction.user.id] &&
-        Date.now() - bot.slots[interaction.user.id].lastPlayed < 300000
+        bot.cache.slots[interaction.user.id] &&
+        Date.now() - bot.cache.slots[interaction.user.id].lastPlayed < 300000
       ) {
         await interaction.editReply({
           content: "You can only play slots once every 5 minutes.",
         });
         return;
       }
-      bot.slots[interaction.user.id] = {
+      bot.cache.slots[interaction.user.id] = {
         lastPlayed: Date.now(),
       };
 

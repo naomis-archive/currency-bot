@@ -41,13 +41,13 @@ export const word: Command = {
       }
 
       const targetWord = getRandomValue(Words);
-      if (bot.wordGame[interaction.user.id]) {
+      if (bot.cache.wordGame[interaction.user.id]) {
         await interaction.editReply({
           content: "You are already playing a word game!",
         });
         return;
       }
-      bot.wordGame[interaction.user.id] = {
+      bot.cache.wordGame[interaction.user.id] = {
         wager,
         target: targetWord,
         guesses: [],
@@ -66,7 +66,7 @@ export const word: Command = {
         components: [row],
       });
     } catch (err) {
-      await errorHandler(bot, "word game", err);
+      await errorHandler(bot, "word command", err);
     }
   },
 };

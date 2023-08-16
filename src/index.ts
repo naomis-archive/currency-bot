@@ -31,15 +31,17 @@ import { validateEnv } from "./utils/validateEnv";
     bot.env = validateEnv();
     bot.db = new PrismaClient();
     bot.cooldowns = {};
-    bot.slots = {};
-    bot.wordGame = {};
+    bot.cache = {
+      wordGame: {},
+      slots: {},
+    };
     await bot.db.$connect();
     await loadCommands(bot);
 
     bot.on(Events.InteractionCreate, async (interaction) => {
       try {
         if (interaction.isChatInputCommand()) {
-          await interaction.deferReply();
+          await interaction.deferReply({ ephemeral: true });
           if (!isGuildCommandCommand(interaction)) {
             await interaction.editReply({
               content: "You can only run this in a guild.",
@@ -64,7 +66,7 @@ import { validateEnv } from "./utils/validateEnv";
                 ephemeral: true,
               });
             }
-            if (!bot.wordGame[id]) {
+            if (!bot.cache.wordGame[id]) {
               await interaction.reply({
                 content:
                   "This might be a stale message, as you don't have a game in the cache. Please start a new game.",
@@ -91,6 +93,7 @@ import { validateEnv } from "./utils/validateEnv";
         }
         if (interaction.isModalSubmit()) {
           if (interaction.customId.startsWith("word-")) {
+            await interaction.deferReply({ ephemeral: true });
             await processWordGuess(bot, interaction);
           }
         }

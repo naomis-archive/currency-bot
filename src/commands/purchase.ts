@@ -25,7 +25,7 @@ export const purchase: Command = {
     ),
   run: async (bot, interaction) => {
     try {
-      if (bot.wordGame[interaction.user.id]) {
+      if (bot.cache.wordGame[interaction.user.id]) {
         await interaction.editReply({
           content:
             "You cannot purchase items while you have an active word game. Please finish that before playing slots.",
@@ -72,10 +72,10 @@ export const purchase: Command = {
         }**!\nYou now have ${newTotal.toLocaleString()} ${CurrencyName}.\n`,
       });
       await interaction.channel?.send({
-        content: `<@!${bot.env.ownerId}>, a purchase was made!`,
+        content: `<@!${bot.env.ownerId}>, ${interaction.user.username} has purchased ${item.name}!`,
       });
     } catch (err) {
-      await errorHandler(bot, "about command", err);
+      await errorHandler(bot, "purchase command", err);
     }
   },
 };
