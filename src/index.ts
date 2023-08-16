@@ -31,8 +31,10 @@ import { validateEnv } from "./utils/validateEnv";
     bot.env = validateEnv();
     bot.db = new PrismaClient();
     bot.cooldowns = {};
-    bot.slots = {};
-    bot.wordGame = {};
+    bot.cache = {
+      wordGame: {},
+      slots: {},
+    };
     await bot.db.$connect();
     await loadCommands(bot);
 
@@ -64,7 +66,7 @@ import { validateEnv } from "./utils/validateEnv";
                 ephemeral: true,
               });
             }
-            if (!bot.wordGame[id]) {
+            if (!bot.cache.wordGame[id]) {
               await interaction.reply({
                 content:
                   "This might be a stale message, as you don't have a game in the cache. Please start a new game.",

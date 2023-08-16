@@ -34,7 +34,7 @@ export const award: Command = {
         return;
       }
       const target = interaction.options.getUser("target", true);
-      if (bot.wordGame[target.id]) {
+      if (bot.cache.wordGame[target.id]) {
         await interaction.editReply({
           content:
             "Target has an active word game and cannot be awarded points until that is resolved.",

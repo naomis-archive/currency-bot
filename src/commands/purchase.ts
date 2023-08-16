@@ -25,7 +25,7 @@ export const purchase: Command = {
     ),
   run: async (bot, interaction) => {
     try {
-      if (bot.wordGame[interaction.user.id]) {
+      if (bot.cache.wordGame[interaction.user.id]) {
         await interaction.editReply({
           content:
             "You cannot purchase items while you have an active word game. Please finish that before playing slots.",

@@ -43,7 +43,7 @@ export const processWordGuess = async (
       .setLabel("Guess the Word");
 
     const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
-    const cache = bot.wordGame[interaction.user.id];
+    const cache = bot.cache.wordGame[interaction.user.id];
     cache.guesses.push(formatWordGuess(guess, cache.target));
     if (guess === cache.target) {
       const newTotal = cache.balance + cache.wager * 4;
@@ -57,7 +57,7 @@ ${cache.guesses.join("\n")}
 \`\`\``,
         components: [],
       });
-      delete bot.wordGame[interaction.user.id];
+      delete bot.cache.wordGame[interaction.user.id];
       await bot.db.users.update({
         where: {
           userId: interaction.user.id,
@@ -79,7 +79,7 @@ ${cache.guesses.join("\n")}
 \`\`\``,
         components: [],
       });
-      delete bot.wordGame[interaction.user.id];
+      delete bot.cache.wordGame[interaction.user.id];
       await bot.db.users.update({
         where: {
           userId: interaction.user.id,
