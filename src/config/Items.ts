@@ -32,7 +32,7 @@ export const Items: Item[] = [
   {
     name: "Shut Naomi Up",
     description:
-      "Make Naomi shut up for 24 hours. She cannot send any messages in this server.",
+      "Make Naomi shut up for the remainder of her day.. She cannot send any messages in this server (except in response to a project or work related query).",
     price: 2984743,
     internalId: "shut-up",
   },
