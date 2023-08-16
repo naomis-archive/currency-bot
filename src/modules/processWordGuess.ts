@@ -1,4 +1,9 @@
-import { ModalSubmitInteraction } from "discord.js";
+import {
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  ModalSubmitInteraction,
+} from "discord.js";
 
 import { CurrencyName } from "../config/CurrencyName";
 import { Words } from "../config/Words";
@@ -20,33 +25,29 @@ export const processWordGuess = async (
   try {
     const [, id] = interaction.customId.split("-");
     if (id !== interaction.user.id) {
-      await interaction.reply({
-        ephemeral: true,
+      await interaction.editReply({
         content: "How did you submit a modal that isn't yours?",
-      });
-      return;
-    }
-    if (!interaction.message) {
-      await interaction.reply({
-        ephemeral: true,
-        content: "The message for this interaction doesn't exist.",
       });
       return;
     }
     const guess = interaction.fields.getTextInputValue("guess");
     if (!Words.includes(guess)) {
-      await interaction.reply({
-        ephemeral: true,
+      await interaction.editReply({
         content: "That's not in our dictionary.",
       });
       return;
     }
+    const button = new ButtonBuilder()
+      .setCustomId(`word-${interaction.user.id}`)
+      .setStyle(ButtonStyle.Success)
+      .setLabel("Guess the Word");
+
+    const row = new ActionRowBuilder<ButtonBuilder>().addComponents(button);
     const cache = bot.wordGame[interaction.user.id];
-    await interaction.deferUpdate();
     cache.guesses.push(formatWordGuess(guess, cache.target));
     if (guess === cache.target) {
       const newTotal = cache.balance + cache.wager * 4;
-      await interaction.message.edit({
+      await interaction.editReply({
         content: `You won ${
           cache.wager * 5
         } ${CurrencyName}! Your new total is ${newTotal} ${CurrencyName}.
@@ -68,7 +69,7 @@ ${cache.guesses.join("\n")}
       return;
     }
     if (cache.guesses.length >= 5) {
-      await interaction.message.edit({
+      await interaction.editReply({
         content: `You lost ${cache.wager} ${CurrencyName}! The word was ${
           cache.target
         }.
@@ -90,13 +91,14 @@ ${cache.guesses.join("\n")}
       return;
     }
 
-    await interaction.message.edit({
+    await interaction.editReply({
       content: `Guess ${cache.guesses.length} / 5:
 
 \`\`\`ansi
 ${cache.guesses.join("\n")}
 \`\`\`
             `,
+      components: [row],
     });
   } catch (err) {
     await errorHandler(bot, "process word guess", err);

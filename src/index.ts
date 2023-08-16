@@ -39,7 +39,7 @@ import { validateEnv } from "./utils/validateEnv";
     bot.on(Events.InteractionCreate, async (interaction) => {
       try {
         if (interaction.isChatInputCommand()) {
-          await interaction.deferReply();
+          await interaction.deferReply({ ephemeral: true });
           if (!isGuildCommandCommand(interaction)) {
             await interaction.editReply({
               content: "You can only run this in a guild.",
@@ -91,6 +91,7 @@ import { validateEnv } from "./utils/validateEnv";
         }
         if (interaction.isModalSubmit()) {
           if (interaction.customId.startsWith("word-")) {
+            await interaction.deferReply({ ephemeral: true });
             await processWordGuess(bot, interaction);
           }
         }

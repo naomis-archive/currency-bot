@@ -72,7 +72,7 @@ export const purchase: Command = {
         }**!\nYou now have ${newTotal.toLocaleString()} ${CurrencyName}.\n`,
       });
       await interaction.channel?.send({
-        content: `<@!${bot.env.ownerId}>, a purchase was made!`,
+        content: `<@!${bot.env.ownerId}>, ${interaction.user.username} has purchased ${item.name}!`,
       });
     } catch (err) {
       await errorHandler(bot, "about command", err);
