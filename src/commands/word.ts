@@ -66,7 +66,7 @@ export const word: Command = {
         components: [row],
       });
     } catch (err) {
-      await errorHandler(bot, "word game", err);
+      await errorHandler(bot, "word command", err);
     }
   },
 };

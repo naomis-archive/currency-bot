@@ -45,7 +45,7 @@ export const item: Command = {
         embeds: [embed],
       });
     } catch (err) {
-      await errorHandler(bot, "about command", err);
+      await errorHandler(bot, "item command", err);
     }
   },
 };

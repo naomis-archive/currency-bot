@@ -33,7 +33,7 @@ export const wallet: Command = {
         embeds: [embed],
       });
     } catch (err) {
-      await errorHandler(bot, "about command", err);
+      await errorHandler(bot, "wallet command", err);
     }
   },
 };

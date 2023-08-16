@@ -75,7 +75,7 @@ export const purchase: Command = {
         content: `<@!${bot.env.ownerId}>, ${interaction.user.username} has purchased ${item.name}!`,
       });
     } catch (err) {
-      await errorHandler(bot, "about command", err);
+      await errorHandler(bot, "purchase command", err);
     }
   },
 };
