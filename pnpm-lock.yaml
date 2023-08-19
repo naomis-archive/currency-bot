@@ -38,8 +38,8 @@ devDependencies:
     specifier: 18.17.6
     version: 18.17.6
   alex:
-    specifier: 11.0.0
-    version: 11.0.0
+    specifier: 11.0.1
+    version: 11.0.1
   chai:
     specifier: 4.3.7
     version: 4.3.7
@@ -686,8 +686,8 @@ packages:
       uri-js: 4.4.1
     dev: true
 
-  /alex@11.0.0:
-    resolution: {integrity: sha512-YbVCn9CZZDtH5wzGYt0mTergstBhGmm9jnGaG4UmO2nCQLD6swj5eqHIHnNKWAh62EtwItMai3dPNFbux6KOHw==}
+  /alex@11.0.1:
+    resolution: {integrity: sha512-rKLBZxD/lvuykdC6XB8ma9YjDl46j9ayHROZUtC1yJ2jlGpoP7RZR1tBBSjtlr260ixIW6iCkqAnHzmti5Q6CQ==}
     hasBin: true
     dependencies:
       '@types/mdast': 3.0.12
