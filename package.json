@@ -35,6 +35,7 @@
     "@prisma/client": "5.1.1",
     "discord.js": "14.13.0",
     "dotenv": "16.3.1",
+    "random": "3",
     "winston": "3.10.0"
   },
   "devDependencies": {
