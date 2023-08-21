@@ -1,3 +1,5 @@
+import rand from "random";
+
 /**
  * Module to select a random value from the provided array.
  *
@@ -6,5 +8,6 @@
  * @returns {T} A random item from the array.
  */
 export const getRandomValue = <T>(array: T[]): T => {
-  return array[Math.floor(Math.random() * array.length)];
+  const random = rand.uniformInt(0, array.length - 1);
+  return array[random()];
 };

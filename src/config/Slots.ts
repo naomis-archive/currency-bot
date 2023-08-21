@@ -17,6 +17,11 @@ export const Slots = [
   "<:NaomiSing:1065885810785796126>",
   "<:NaomiSmh:1065885897775644732>",
   "<:NaomiThink:1065906168414863360>",
+  "<:naomiamethyst:1140325730304147527>",
+  "<:naomicopper:1140129937173520499>",
+  "<:naomigold:1140129934526914690>",
+  "<:naomiplatinum:1140129931343446076>",
+  "<a:naomicheer:1019871748537208912>",
 ];
 
 export const SlotReel = "<a:slot:1140435469478404208>";
